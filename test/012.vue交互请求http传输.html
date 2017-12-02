@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-resource.js"></script>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="确定" @click="get">
+        <input type="button" value="确定2" @click="jsonP">
+        <br>
+        {{msg}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                msg:'',
+            },
+            methods:{
+                get:function() {
+                    // 要传递的参数
+                    var params={
+                        a:1,
+                        b:2,
+                    }
+                    // 使用get请求访问数据 注意，本地访问文件chrome会拦截，使用火狐进行测试
+                    this.$http.get('aa.txt',params).then(function (res) {
+                        console.log(res.status);
+                        if(res.status == 200 ){
+                            alert("success");
+                            vm.msg = res.data;
+                        }
+                    },function (res) {
+                        console.log(res.data);
+                        alert("error:"+res.status);
+                    })
+                },
+                post:function() {
+                    var params = {
+                        a:1,
+                        b:2,
+                    }
+                    var contentType = {
+                        emulateJSON:true
+                    }
+                    this.$http.post('/aa/dd',params,contentType).then(function (result) {
+                        if(result.status == 200){
+                            console.log(result.data);
+                        }
+                    })
+                },
+                jsonP:function() {
+                    //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/
+                    //su?wd=&json=1&p=3&sid=&req=2&csor=0&cb=jQuery110209452955058557724_1512111481876&_=1512111481877
+                    // 注意cb是jsonp的回调函数名称，需要配置
+                    var url = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su';
+                    var params = {wd:'a'};
+                    // 用于解决跨域问题
+                    this.$http.jsonp(url,params,{
+                        jsonp:'cb' // callback的名称，默认是callback
+                    }).then(function (r) {
+                        if(r.status == 200){
+                            console.log(r.data);
+                            alert(r.data.s);
+                        }
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+

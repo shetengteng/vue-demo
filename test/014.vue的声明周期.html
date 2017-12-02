@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" v-cloak>
+        {{msg}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                msg:'hello vue.js',
+            },
+            created:function(){
+                console.log('1.实例已经创建...');
+            },
+            beforeCompile:function() {
+                console.log('2.编译之前执行...');
+            },
+            compiled:function(){
+                console.log('3.编译之后执行...');
+            },
+            ready:function(){
+                console.log('4.msg数据插入到dom节点中')
+            },
+            beforeDestroy: function() {
+                console.log('5.销毁之前...');
+            },
+            destroyed: function () {
+                console.log('6.销毁之后...');
+            },
+            methods:{
+                
+            }
+        });
+        // 点击页面，执行vm销毁动作
+        document.onclick = function () {
+            vm.$destroy();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <input type="text" @keydown="show($event)" placeholder="keyDown">
+        <input type="text" @keyUp="show($event)" placeholder="keyUp">
+        <input type="text" @keyUp="show02($event)" placeholder="按回车键触发">
+        <input type="text" @keyUp.enter="show03" placeholder="按回车键触发方式2">
+        <input type="text" @keyUp.13="show03" placeholder="按回车键触发方式3">
+        <input type="text" @keyUp.up="show03" placeholder="按上键触发方式">
+        <input type="text" @keyUp.down="show03" placeholder="按下键触发方式">
+        <input type="text" @keyUp.left="show03" placeholder="按左键触发方式">
+        <input type="text" @keyUp.right="show03" placeholder="按右键触发方式">
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{},
+            methods:{
+                show:function(event){
+                    // 输出按下的按键的keyCode
+                    alert(event.keyCode);
+                },
+                show02:function(event){
+                if (event.keyCode == 13) {
+                        alert(event.keyCode);
+                    }
+                },
+                show03:function(){
+                    alert("1");
+                },
+            }
+        });
+    </script>
+</body>
+</html>

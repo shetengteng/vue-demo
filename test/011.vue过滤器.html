@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <input type="text" name="" v-model="msg" id="">
+        <!-- vue自带过滤器 -->
+        {{'helloworld' | uppercase}}<br>
+        {{'ZZZzzz' | lowercase}}<br>
+        {{'helloworld' | capitalize}}<br>
+        <!-- 多个过滤器的使用 -->
+        {{'HELLO'|lowercase|capitalize}} <br>
+        <!-- 金融操作的过滤器 -->
+        <!-- 显示的是$13.00 -->
+        {{13 | currency}} <br>
+        <!-- 可以给过滤器传递参数 显示的是￥13.00 -->
+        {{13 | currency '￥'}} <br>
+        <!-- 显示的是rmb13.00 -->
+        {{13 | currency 'rmb'}} <br> 
+        <!-- 使用debounce 过滤器 有延时效果 延时2000ms执行 -->
+        <input type="text" name="" id="" @keyup="show | debounce 2000"><br>
+        <ul>
+            <!-- 使用limtBy 从数组中获取指定个数的数据 -->
+            <!-- limitBy含有2个参数，第一个标志取几个，第二个表示哪个索引开始取 -->
+            <li v-for="item in arr | limitBy 2">{{item}}</li>
+        </ul><hr>
+        <ul>
+            <li v-for="item in arr | limitBy 2 arr.length-1">{{item}}</li>
+        </ul><hr>
+        <ul>
+            <!-- 使用 filterBy 过滤器，过滤指定字符的结果 -->
+            <li v-for="item in arr2 | filterBy 'r'">{{item}}</li>
+        </ul><hr>
+        <div>
+            <!-- 动态更改filterBy 过滤器的参数 -->
+            <input type="text" name="" id="" v-model="a" placeholder="输入过滤的字符">
+            <ul>
+                <li v-for="item in arr2 | filterBy a">{{item}}</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                msg:'',
+                arr:[1,2,3,4,5],
+                arr2:['appple','orange','pear','width','height','world'],
+                f:'a',
+            },
+            methods:{
+                show:function(){
+                    alert("hh"); 
+                }
+            }
+        });
+    </script>
+</body>
+</html>

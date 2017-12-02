@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+        .blue{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <!-- 绑定属性的写法 不建议使用该方式 -->
+        <img src="{{url}}" alt="">
+        <!-- 属性绑定方式1 -->
+        <img v-bind:src="url" alt="">
+        <!-- 属性绑定方式2 -->
+        <img :src="url" alt="" :width = "w" :title="t">
+        <!-- class的绑定写法1 -->
+        <strong :class="[r,b]">class的绑定写法1</strong>
+        <!-- class的绑定写法2 -->
+        <strong :class="{red:true,blue:true}">class的绑定写法2</strong>
+        <!-- class的绑定写法3 官方推荐 -->
+        <strong :class="json">class的绑定写法3</strong>
+        <!-- style的绑定写法 -->
+        <strong :style="[s,m]">style的绑定写法1</strong>
+        <!-- style的绑定写法2 -->
+        <strong :style="jsonS">style的绑定写法1</strong>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                url:'https://www.baidu.com/img/bd_logo1.png',
+                w:'100px',
+                t:'这是一个图片',
+                r:'red',
+                b:'blue',
+                json:{
+                    red:true,
+                    blue:false,
+                },
+                s:{color:'red'},
+                m:{backgroundColor:'blue'}, // 注意js中对于background-color需要使用驼峰命名进行修改
+                jsonS:{
+                    color:'blue',
+                    backgroundColor:'gray',
+                }
+            },
+            methods:{
+            }
+        })
+    </script>
+</body>
+</html>

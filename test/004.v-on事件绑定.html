@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <input type="text" v-model="msg"/>
+        <input type="button" v-on:click="show" value="show"/>
+        <input type="button" v-on:mouseover="show" value="mouseover" />
+        <input type="button" v-on:mouseout="show" value="mouseout"/>
+        <input type="button" v-on:dblclick="show" value="dblclick"/>
+        {{msg}}
+    </div>
+    <script>
+        var c = new Vue({
+            el:'#box',
+            data:{
+                msg:'model test',
+                arr: ['apple', 'banana', 'pear', 'orange'],
+                json: { a: 'apple', b: 'banana', o: 'orange' }
+            },
+            methods:{
+                show:function(){
+                    c.msg = "ffff";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

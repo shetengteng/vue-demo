@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <input type="text" name="" v-model="msg" id="">
+        <br>
+        <!-- 数据双向绑定 -->
+        {{msg}}
+        <br>
+        <!-- 数据只绑定一次，调用初始化值 -->
+        {{*msg}}
+        <!-- html 的转义操作 -->
+        <input type="text" name="" v-model="msgHtml" id="">
+        <!-- 插入html文本框 -->
+        {{{msgHtml}}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                msg:'abc',
+                msgHtml:'<h1>hello</h1>',
+            }
+        });
+    </script>
+</body>
+</html>

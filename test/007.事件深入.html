@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="确定" @click="show($event)">
+        <div @click="show01">
+            <!-- 点击该button后，先触发本身的click按键，然后触发div的click事件 -->
+            <input type="button" value="冒泡产生" @click="show02">
+        </div>
+        <div @click="show01">
+            <!-- 取消事件的冒泡，使用原生的js事件对象的属性 -->
+            <input type="button" value="消除冒泡方式1" @click="show03">
+        </div>
+        <div @click="show01">
+            <!-- 使用@click.stop的vue的方式阻止冒泡 -->
+            <input type="button" value="消除冒泡方式2" @click.stop="show04">
+        </div>
+        <div>
+            <!--  -->
+            <input type="button" value="右键默认行为未取消" @contextmenu="show01">
+            <input type="button" value="右键默认行为取消方式1" @contextmenu="show05($event)">
+            <input type="button" value="右键默认行为取消方式2" @contextmenu.prevent="show01">
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{},
+            methods:{
+                show:function(event){
+                    alert(event.clientX);
+                },
+                show01:function(){
+                    alert(1);
+                },
+                show02:function(){
+                    alert(2);
+                },
+                show03:function(event){
+                    alert(3);
+                    // 取消事件的冒泡
+                    event.cancelBubble = true;
+                },
+                show04:function(){
+                    alert(4);
+                },
+                show05:function(event){
+                    alert(5);
+                    // 取消浏览器鼠标右键的默认行为
+                    event.preventDefault();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
