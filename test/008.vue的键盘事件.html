@@ -10,14 +10,14 @@
 <body>
     <div id="box">
         <input type="text" @keydown="show($event)" placeholder="keyDown">
-        <input type="text" @keyUp="show($event)" placeholder="keyUp">
-        <input type="text" @keyUp="show02($event)" placeholder="按回车键触发">
-        <input type="text" @keyUp.enter="show03" placeholder="按回车键触发方式2">
-        <input type="text" @keyUp.13="show03" placeholder="按回车键触发方式3">
-        <input type="text" @keyUp.up="show03" placeholder="按上键触发方式">
-        <input type="text" @keyUp.down="show03" placeholder="按下键触发方式">
-        <input type="text" @keyUp.left="show03" placeholder="按左键触发方式">
-        <input type="text" @keyUp.right="show03" placeholder="按右键触发方式">
+        <input type="text" @keyup="show($event)" placeholder="keyUp">
+        <input type="text" @keyup="show02($event)" placeholder="按回车键触发">
+        <input type="text" @keyup.enter="show03" placeholder="按回车键触发方式2">
+        <input type="text" @keyup.13="show03" placeholder="按回车键触发方式3">
+        <input type="text" @keyup.up="show03" placeholder="按上键触发方式">
+        <input type="text" @keyup.down="show03" placeholder="按下键触发方式">
+        <input type="text" @keyup.left="show03" placeholder="按左键触发方式">
+        <input type="text" @keyup.right="show03" placeholder="按右键触发方式">
     </div>
     <script>
         var vm = new Vue({

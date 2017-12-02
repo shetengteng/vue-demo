@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+       {{a}} <br/> {{b}} <br/>
+        {{obj | json}} <br/>
+        {{obj2 | json}} <br/>
+        {{obj3 | json}} <br/>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                a:1,
+                b:2,
+                obj:{name:'stt',age:'22',},
+                obj2:{name:'stt2',age:'23',},
+                obj3:{name:'stt3',age:'24',},
+            },
+            methods:{
+            },
+            watch:{
+                // 写法:1:a发生了变化会触发次函数
+                a: function () {
+                    this.b = this.a + 2;
+                },
+                obj: {
+                    handler:function() {
+                        alert('obj的深度监听触发');
+                    },
+                    deep:true,
+                },
+                // 如果不使用深度监听，可以监听对象的子元素，但是必须要使用点取和字符串的形式
+                'obj3.name':function(){
+                    alert('obj3.name的深度监听触发');
+                }
+            }
+        });
+        // 写法2：b发生了变化会触发此函数
+        vm.$watch('b', function () {
+            alert('b发生了变化');
+        })
+        // 深度监听
+        vm.$watch('obj2', function () {
+            alert('obj2的深度监听触发')
+        },{deep:true});
+
+        document.onclick = function () {
+            vm.a++;
+            vm.obj.name = 'sss2';
+            vm.obj2.name = 'sss3';
+            vm.obj3.name = 'sss4';
+        }
+    </script>
+</body>
+</html>

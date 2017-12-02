@@ -43,7 +43,11 @@
             <ul>
                 <li v-for="item in arr2 | filterBy a">{{item}}</li>
             </ul>
-        </div>
+        </div><hr>
+        <ul>
+            <!-- orderBy 排序 -->
+            <li v-for="item in arr2 | orderBy -1">{{item}}</li>
+        </ul>
     </div>
     <script>
         var vm = new Vue({
