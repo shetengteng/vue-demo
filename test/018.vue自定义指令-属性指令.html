@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        {{msg}} <br/>
+        <!-- 自定义属性名称为red，但是实际调用需要使用vue的前缀v- -->
+        <span v-red="color">{{msg}}</span><br/>
+        <span v-blue>{{msg}}</span><br/>
+        <div v-drag :style="{width:'100px',height:'100px',background:'blue',position:'absolute',right:0,top:0}"></div>
+    </div>
+    <script>
+        // 自定义属性指令写法1：
+        Vue.directive('red', function (value) {
+            // 注意：这里的this可以看作为vm的实例对象
+            this.el.style.background=value;
+        });
+        // 自定义属性指令写法2：默认会调用bind方法
+        Vue.directive('blue',{
+            bind: function () {
+                this.el.style.background='blue';
+            }
+        });
+        // 拖拽功能的实现
+        Vue.directive('drag',function(){
+            var oDiv = this.el;// 获取div对象的固定写法与vm.$el等价
+            oDiv.onmousedown = function (ev) {
+                var disX = ev.clientX - oDiv.offsetLeft;
+                var disY = ev.clientY - oDiv.offsetTop;
+                
+                document.onmousemove = function (ev) {
+                    var l = ev.clientX - disX;
+                    var t = ev.clientY - disY;
+                    oDiv.style.left =  l + 'px';
+                    oDiv.style.top = t + 'px';
+                };
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                };
+            }
+        });
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                msg:'hello world',
+                color:'red',
+            },
+            methods:{
+            },
+        });
+    </script>
+
+</body>
+</html>
